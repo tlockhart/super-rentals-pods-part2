@@ -14,8 +14,11 @@
     {{!-- <li><Rental @rental={{@model}} /></li>
     <li><Rental @rental={{@model}} /></li>
     <li><Rental @rental={{@model}} /></li> --}}
+
+    {{!-- Passing the model to the RentalItem Component --}}
     {{#each @model as |rental|}}
-      <li><Rental @rental={{rental}} /></li>
+    {{!-- {{log rental}} --}}
+      <li><RentalItem @rental={{rental}} /></li>
     {{/each}}
   </ul>
 </div>

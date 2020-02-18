@@ -18,7 +18,7 @@ export default class Index extends Route{
       // let { attributes } = model;
       let { id, attributes } = model;
       let type;
-      console.log(`attr: ${JSON.stringify(attributes)}`);
+      // console.log(`attr: ${JSON.stringify(attributes)}`);
       if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
         type = 'Community';
       } else {
