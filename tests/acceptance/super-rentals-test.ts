@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { click, visit, currentURL } from '@ember/test-helpers';
+import { click, find, visit, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 
 module('Acceptance | super rentals', function(hooks) {
@@ -24,17 +24,33 @@ module('Acceptance | super rentals', function(hooks) {
     assert.dom('.rental').exists({ count: 3 });
 
     await click('.rental:first-of-type a');
-    assert.equal(currentURL(), '/rentals/grand-old-mansion');
+    assert.equal(currentURL(), '/rental/grand-old-mansion');
   });
 
-  test('visiting /rentals/grand-old-mansion', async function(assert) {
-    await visit('/rentals/grand-old-mansion');
+  test('visiting /rental/grand-old-mansion', async function(assert) {
+    await visit('/rental/grand-old-mansion');
 
-    assert.equal(currentURL(), '/rentals/grand-old-mansion');
+    assert.equal(currentURL(), '/rental/grand-old-mansion');
     assert.dom('nav').exists();
     assert.dom('h1').containsText('SuperRentals');
     assert.dom('h2').containsText('Grand Old Mansion');
     assert.dom('.rental.detailed').exists();
+
+    // Part2: Why we can't test window.location.htef
+
+    // is class share, property button on page?
+    assert.dom('.share.button').hasText('Share on Twitter');
+
+    let button = find('.share.button');
+
+    // get href property of button
+    let tweetURL = new URL(button.href);
+    assert.equal(tweetURL.host, 'twitter.com');
+
+    assert.equal(
+      tweetURL.searchParams.get('url'),
+      `${window.location.origin}/rental/grand-old-mansion`
+    );
   });
 
   test('visiting /about', async function(assert) {

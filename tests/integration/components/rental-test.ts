@@ -31,11 +31,11 @@ module('Integration | Component | rental', function(hooks) {
       });
 
       // set the values of rental to our the values in setPrpoerties
-      await render(hbs`<Rental @rental={{this.rental}} />`);
+      await render(hbs`<RentalItem @rental={{this.rental}} />`);
 
     assert.dom('article').hasClass('rental');
     assert.dom('article h3').hasText('Grand Old Mansion');
-    assert.dom('article h3 a').hasAttribute('href', '/rentals/grand-old-mansion');
+    assert.dom('article h3 a').hasAttribute('href', '/rental/grand-old-mansion');
     assert.dom('article .detail.owner').includesText('Veruca Salt');
     assert.dom('article .detail.type').includesText('Standalone');
     assert.dom('article .detail.location').includesText('San Francisco');
